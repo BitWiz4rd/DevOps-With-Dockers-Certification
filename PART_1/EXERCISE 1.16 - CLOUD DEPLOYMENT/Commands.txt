@@ -1,0 +1,8 @@
+docker pull devopsdockeruh/heroku-example
+heroku login
+heroku container:login
+docker tag devopsdockeruh/heroku-example registry.heroku.com/dcoursepage-devops-with-docker/web
+docker push registry.heroku.com/dcoursepage-devops-with-docker/web
+heroku container:release -a dcoursepage-devops-with-docker web
+
+WEB: https://dcoursepage-devops-with-docker.herokuapp.com/presses/new,

@@ -1,0 +1,2 @@
+docker exec -it secrets bash
+tail -f text.log

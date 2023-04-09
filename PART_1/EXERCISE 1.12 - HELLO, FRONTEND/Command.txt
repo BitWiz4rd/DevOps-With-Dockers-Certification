@@ -1,0 +1,18 @@
+macky@Mackys-MacPro:/Users/macky/Certifications/DevOps with Docker/EXERCISE 1.12 - HELLO, FRONTEND$ docker run -p 5050:5000 example-frontend:v1
+ INFO  Accepting connections at http://localhost:5000
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 GET /
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 Returned 200 in 10 ms
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 GET /static/css/main.eaa5d75e.chunk.css
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 GET /static/js/2.43ca3586.chunk.js
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 GET /static/js/main.c1c74abb.chunk.js
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 Returned 200 in 7 ms
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 Returned 200 in 4 ms
+ HTTP  3/21/2023 11:22:26 AM 172.17.0.1 Returned 200 in 6 ms
+ HTTP  3/21/2023 11:22:27 AM 172.17.0.1 GET /static/media/toskalogo.c0f35cf0.svg
+ HTTP  3/21/2023 11:22:27 AM 172.17.0.1 Returned 200 in 3 ms
+ HTTP  3/21/2023 11:22:27 AM 172.17.0.1 GET /manifest.json
+ HTTP  3/21/2023 11:22:27 AM 172.17.0.1 Returned 200 in 2 ms
+ HTTP  3/21/2023 11:22:27 AM 172.17.0.1 GET /favicon.ico
+ HTTP  3/21/2023 11:22:27 AM 172.17.0.1 Returned 200 in 0 ms
+ HTTP  3/21/2023 11:22:39 AM 172.17.0.1 GET /api/ping
+ HTTP  3/21/2023 11:22:39 AM 172.17.0.1 Returned 200 in 1 ms
