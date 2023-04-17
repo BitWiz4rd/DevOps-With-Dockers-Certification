@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+    # Redis Memory DB
+    redis-exercise28:
+      image: redis
+      container_name: redis-exercise28
+
+    # Postgres SQL DB
+    db-exercise28:
+      image: postgres:13.2-alpine
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: $HOST./data
+          target: /var/lib/postgresql/data
+      environment:
+        POSTGRES_PASSWORD: postgres
+      container_name: db-exercise28
+
+    # Frontend Server
+    frontend-exercise28:
+      image: example-frontend:v3
+      environment:
+        - REACT_APP_BACKEND_URL=http://localhost/api
+      ports:
+            - 5050:5000
+      command: ["serve", "-s", "-l", "5000", "build"]
+      container_name: frontend-exercise28
+
+    # Backend Server
+    backend-exercise28:
+      image: example-backend:v3
+      environment:
+        - REQUEST_ORIGIN=http://localhost
+        - REDIS_HOST=redis-exercise28
+        - REDIS_PORT=6379
+        - POSTGRES_HOST=db-exercise28
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DATABASE=postgres
+      ports:
+            - 5051:8080
+      command: ["./server"]
+      container_name: backend-exercise28
+    
+    # Nginx ProxyPass Configuration
+    nginx:
+      image: nginx
+      container_name: nginx-exercise28
+      volumes:
+          - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      ports:
+          - 80:80
+      depends_on: ["backend-exercise28", "frontend-exercise28"]
+      

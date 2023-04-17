@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+    frontend-exercise23:
+      image: example-frontend:v3
+      environment:
+        - REACT_APP_BACKEND_URL=http://localhost:5051
+      ports:
+            - 5050:5000
+      command: ["serve", "-s", "-l", "5000", "build"]
+      container_name: frontend-exercise23
+
+    backend-exercise23:
+      image: example-backend:v3
+      environment:
+        - REQUEST_ORIGIN=http://localhost:5050
+      ports:
+            - 5051:8080
+      command: ["./server"]
+      container_name: backend-exercise23

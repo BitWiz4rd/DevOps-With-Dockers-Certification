@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+    # Redis Memory DB
+    redis-exercise210:
+      image: redis
+      container_name: redis-exercise210
+
+    # Postgres SQL DB
+    db-exercise210:
+      image: postgres:13.2-alpine
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: $HOST./data
+          target: /var/lib/postgresql/data
+      environment:
+        POSTGRES_PASSWORD: postgres
+      container_name: db-exercise210
+
+    # Frontend Server
+    frontend-exercise210:
+      image: example-frontend:v4
+      command: ["serve", "-s", "-l", "5000", "build"]
+      container_name: frontend-exercise210
+
+    # Backend Server
+    backend-exercise210:
+      image: example-backend:v3
+      environment:
+        - REQUEST_ORIGIN=http://localhost
+        - REDIS_HOST=redis-exercise210
+        - REDIS_PORT=6379
+        - POSTGRES_HOST=db-exercise210
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DATABASE=postgres
+      command: ["./server"]
+      container_name: backend-exercise210
+    
+    # Nginx ProxyPass Configuration
+    nginx:
+      image: nginx
+      container_name: nginx-exercise210
+      volumes:
+          - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      ports:
+          - 80:80
+      depends_on: ["backend-exercise210", "frontend-exercise210"]
+      

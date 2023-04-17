@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+    redis-exercise24:
+      image: redis
+      container_name: redis-exercise24
+
+    frontend-exercise24:
+      image: example-frontend:v3
+      environment:
+        - REACT_APP_BACKEND_URL=http://localhost:5051
+      ports:
+            - 5050:5000
+      command: ["serve", "-s", "-l", "5000", "build"]
+      container_name: frontend-exercise24
+
+    backend-exercise24:
+      image: example-backend:v3
+      environment:
+        - REQUEST_ORIGIN=http://localhost:5050
+        - REDIS_HOST=redis-exercise24
+        - REDIS_PORT=6379
+      ports:
+            - 5051:8080
+      command: ["./server"]
+      container_name: backend-exercise24

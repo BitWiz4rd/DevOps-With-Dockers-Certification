@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+    redis-exercise26:
+      image: redis
+      container_name: redis-exercise26
+    db:
+      image: postgres:13.2-alpine
+      restart: unless-stopped
+      environment:
+        POSTGRES_PASSWORD: postgres
+      container_name: db
+
+    frontend-exercise26:
+      image: example-frontend:v3
+      environment:
+        - REACT_APP_BACKEND_URL=http://localhost:5051
+      ports:
+            - 5050:5000
+      command: ["serve", "-s", "-l", "5000", "build"]
+      container_name: frontend-exercise26
+
+    backend-exercise26:
+      image: example-backend:v3
+      environment:
+        - REQUEST_ORIGIN=http://localhost:5050
+        - REDIS_HOST=redis-exercise26
+        - REDIS_PORT=6379
+        - POSTGRES_HOST=db
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DATABASE=postgres
+      ports:
+            - 5051:8080
+      command: ["./server"]
+      container_name: backend-exercise26

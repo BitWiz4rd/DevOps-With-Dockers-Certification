@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+    simple-websvc-exercise22:
+      image: devopsdockeruh/simple-web-service
+      ports:
+            - 3535:8080
+      volumes:
+        - /tmp/svc.txt:/usr/src/app/text.log
+      command: server
+      container_name: simple-websvc-22
