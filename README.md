@@ -2,7 +2,7 @@
 
 **University of Helsinki** - [Course Website](https://devopswithdocker.com/)
 
-<img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" style="width: 100px;" />
+[![Docker Certification](https://img.shields.io/badge/University_of_Helsinki-DevOps_with_Docker_Certification-006a93?logo=docker&logoColor=white)](https://devopswithdocker.com)
 
 ## Table of Contents
 - [Overview](#overview)
